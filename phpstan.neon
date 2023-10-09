@@ -1,0 +1,10 @@
+parameters:
+	treatPhpDocTypesAsCertain: false
+	checkGenericClassInNonGenericObjectType: false
+	ignoreErrors:
+    
+	level: 0
+	paths:
+		- app
+		- config
+		- database

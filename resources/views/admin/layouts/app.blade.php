@@ -62,44 +62,46 @@
                                 </svg>
                             </a>
                             <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                {{-- @can('permission_access') --}}
-                                <li class="">
-                                    <a href="{{ route('permissions.index') }}">
-                                        <img src="{{ asset('assets/images/icons/permission.png') }}"
-                                            class="icon-left-bar" alt="Permission">
-                                        <i class="las la-minus"></i><span>Quyền truy cập</span>
-                                    </a>
-                                </li>
-                                {{-- @endcan
-                                @can('role_access') --}}
-                                <li class="">
-                                    <a href="{{ route('roles.index') }}">
-                                        <img src="{{ asset('assets/images/icons/role.png') }}" class="icon-left-bar"
-                                            alt="Role">
-                                        <i class="las la-minus"></i><span>Vai trò</span>
-                                    </a>
-                                </li>
-                                {{-- @endcan
-                                @can('user_access') --}}
-                                <li class="">
-                                    <a href="{{ route('users.index') }}">
-                                        <img src="{{ asset('assets/images/icons/list-user.png') }}"
-                                            class="icon-left-bar" alt="Role">
-                                        <i class="las la-minus"></i><span>Người dùng</span>
-                                    </a>
-                                </li>
-                                {{-- @endcan --}}
+                                @can('permission_access')
+                                    <li class="">
+                                        <a href="{{ route('permissions.index') }}">
+                                            <img src="{{ asset('assets/images/icons/permission.png') }}"
+                                                class="icon-left-bar" alt="Permission">
+                                            <i class="las la-minus"></i><span>Quyền truy cập</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('role_access')
+                                    <li class="">
+                                        <a href="{{ route('roles.index') }}">
+                                            <img src="{{ asset('assets/images/icons/role.png') }}" class="icon-left-bar"
+                                                alt="Role">
+                                            <i class="las la-minus"></i><span>Vai trò</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('user_access')
+                                    <li class="">
+                                        <a href="{{ route('users.index') }}">
+                                            <img src="{{ asset('assets/images/icons/list-user.png') }}"
+                                                class="icon-left-bar" alt="Role">
+                                            <i class="las la-minus"></i><span>Người dùng</span>
+                                        </a>
+                                    </li>
+                                @endcan
                             </ul>
                         </li>
-                        <li class="">
-                            <a href="{{ route('categories.index') }}" class="svg-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                                    <path
-                                        d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z" />
-                                </svg>
-                                <span class="ml-4">Danh mục bài viết</span>
-                            </a>
-                        </li>
+                        @can('category_access')
+                            <li class="">
+                                <a href="{{ route('categories.index') }}" class="svg-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                                        <path
+                                            d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z" />
+                                    </svg>
+                                    <span class="ml-4">Danh mục bài viết</span>
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </nav>
                 <div class="p-3"></div>

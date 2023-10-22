@@ -9,6 +9,7 @@ use App\Http\Requests\Categories\UpdateRequest;
 use App\Services\Categories\CategoryServiceInterface;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,7 +30,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // abort_if(Gate::denies('category_access'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
+        abort_if(Gate::denies('category_access'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
         $categories = $this->categoryService->getAll();
         return view('admin.categories.index', compact('categories'));
     }
@@ -39,7 +40,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        // abort_if(Gate::denies('category_create'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
+        abort_if(Gate::denies('category_create'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
         return view('admin.categories.create');
     }
 
@@ -48,7 +49,7 @@ class CategoryController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        // abort_if(Gate::denies('category_create'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
+        abort_if(Gate::denies('category_create'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
         $payload = $request->validated();
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -64,7 +65,7 @@ class CategoryController extends Controller
      */
     public function show(int $id)
     {
-        // abort_if(Gate::denies('category_show'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
+        abort_if(Gate::denies('category_show'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
         $category = $this->categoryService->find($id);
         return view('admin.categories.show', compact('category'));
     }
@@ -74,7 +75,7 @@ class CategoryController extends Controller
      */
     public function edit(int $id)
     {
-        // abort_if(Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
+        abort_if(Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
         $category = $this->categoryService->find($id);
         return view('admin.categories.edit', compact('category'));
     }
@@ -84,12 +85,12 @@ class CategoryController extends Controller
      */
     public function update(UpdateRequest $request, int $id)
     {
-        // abort_if(Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
+        abort_if(Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
         $category = $this->categoryService->find($id);
         $payload = $request->validated();
         if ($request->hasFile('image')) {
-            if (Storage::exists(public_path() . $category->image)) {
-                unlink($category->image);
+            if (Storage::exists($category->image)) {
+                Storage::delete($category->image);
             }
             $file = $request->file('image');
             $payload['image'] = FileHelper::store($file, 'categories');
@@ -104,7 +105,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        // abort_if(Gate::denies('category_delete'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
+        abort_if(Gate::denies('category_delete'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
         $this->categoryService->delete($id);
         Toastr::success('Xóa danh mục bài viết thành công', 'Thông báo');
         return back();
@@ -117,6 +118,8 @@ class CategoryController extends Controller
      */
     public function massDestroy(Request $request)
     {
+        abort_if(Gate::denies('category_delete'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
+
         $ids = $request->ids;
         $this->categoryService->massDestroy($ids);
 

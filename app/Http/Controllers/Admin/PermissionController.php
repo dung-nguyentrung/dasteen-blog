@@ -29,7 +29,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        // abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $permission = $this->permissionService->getAll();
         return view('admin.permissions.index', compact('permission'));
@@ -41,7 +41,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        // abort_if(Gate::denies('permission_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('permission_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('admin.permissions.create');
     }
@@ -67,7 +67,7 @@ class PermissionController extends Controller
      */
     public function show(int $id)
     {
-        // abort_if(Gate::denies('permission_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('permission_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $permission = $this->permissionService->find($id);
         return view('admin.permissions.show', compact('permission'));
     }
@@ -80,7 +80,7 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        // abort_if(Gate::denies('permission_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('permission_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('admin.permissions.edit', compact('permission'));
     }
@@ -109,7 +109,7 @@ class PermissionController extends Controller
      */
     public function destroy(int $id)
     {
-        // abort_if(Gate::denies('permission_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('permission_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $this->permissionService->delete($id);
         return back();

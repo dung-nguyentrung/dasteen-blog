@@ -2,13 +2,12 @@
 
 namespace App\Providers;
 
-use App\Models\Permission;
-use App\Repositories\BaseRepository;
-use App\Repositories\BaseRepositoryInterface;
+use App\Repositories\Categories\CategoryRepository;
+use App\Repositories\Categories\CategoryRepositoryInterface;
 use App\Repositories\Permissions\PermissionRepository;
 use App\Repositories\Permissions\PermissionRepositoryInterface;
-use App\Services\BaseService;
-use App\Services\BaseServiceInterface;
+use App\Services\Categories\CategoryService;
+use App\Services\Categories\CategoryServiceInterface;
 use App\Services\Permissions\PermissionService;
 use App\Services\Permissions\PermissionServiceInterface;
 use Illuminate\Support\Facades\Schema;
@@ -33,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
     private function registerRepositories(): void
     {
         $this->app->singleton(PermissionRepositoryInterface::class, PermissionRepository::class);
+        $this->app->singleton(CategoryRepositoryInterface::class, CategoryRepository::class);
     }
 
     /**
@@ -43,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
     private function registerServices(): void
     {
         $this->app->singleton(PermissionServiceInterface::class, PermissionService::class);
+        $this->app->singleton(CategoryServiceInterface::class, CategoryService::class);
     }
 
     /**

@@ -49,7 +49,8 @@ abstract class BaseRepository implements BaseRepositoryInterface
      */
     public function delete(int $id): mixed
     {
-        return $this->model->delete($id);
+        $model = $this->find($id);
+        return $model->delete();
     }
 
     /**

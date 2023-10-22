@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\{
+    CategoryController,
     DashboardController,
     PermissionController,
     RoleController,
@@ -33,3 +34,7 @@ Route::resource('roles', RoleController::class);
 //Users 
 Route::delete('users/massDestroy', [UserController::class, 'massDestroy']);
 Route::resource('users', UserController::class);
+
+// Categories
+Route::delete('categories/massDestroy', [CategoryController::class, 'massDestroy']);
+Route::resource('categories', CategoryController::class);

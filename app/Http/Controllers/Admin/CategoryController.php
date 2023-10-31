@@ -89,9 +89,7 @@ class CategoryController extends Controller
         $category = $this->categoryService->find($id);
         $payload = $request->validated();
         if ($request->hasFile('image')) {
-            if (Storage::exists($category->image)) {
-                Storage::delete($category->image);
-            }
+            FileHelper::delete($category->image);
             $file = $request->file('image');
             $payload['image'] = FileHelper::store($file, 'categories');
         }
@@ -106,6 +104,8 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         abort_if(Gate::denies('category_delete'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
+        $category = $this->categoryService->find($id);
+        FileHelper::delete($category->image);
         $this->categoryService->delete($id);
         Toastr::success('Xóa danh mục bài viết thành công', 'Thông báo');
         return back();
@@ -121,6 +121,7 @@ class CategoryController extends Controller
         abort_if(Gate::denies('category_delete'), Response::HTTP_FORBIDDEN, 'Bạn không có quyền truy cập !');
 
         $ids = $request->ids;
+
         $this->categoryService->massDestroy($ids);
 
         return response(null, Response::HTTP_NO_CONTENT);

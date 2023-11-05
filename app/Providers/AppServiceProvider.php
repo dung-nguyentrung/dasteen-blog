@@ -6,10 +6,14 @@ use App\Repositories\Categories\CategoryRepository;
 use App\Repositories\Categories\CategoryRepositoryInterface;
 use App\Repositories\Permissions\PermissionRepository;
 use App\Repositories\Permissions\PermissionRepositoryInterface;
+use App\Repositories\Tags\TagRepository;
+use App\Repositories\Tags\TagRepositoryInterface;
 use App\Services\Categories\CategoryService;
 use App\Services\Categories\CategoryServiceInterface;
 use App\Services\Permissions\PermissionService;
 use App\Services\Permissions\PermissionServiceInterface;
+use App\Services\Tags\TagService;
+use App\Services\Tags\TagServiceInterface;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(PermissionRepositoryInterface::class, PermissionRepository::class);
         $this->app->singleton(CategoryRepositoryInterface::class, CategoryRepository::class);
+        $this->app->singleton(TagRepositoryInterface::class, TagRepository::class);
     }
 
     /**
@@ -44,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(PermissionServiceInterface::class, PermissionService::class);
         $this->app->singleton(CategoryServiceInterface::class, CategoryService::class);
+        $this->app->singleton(TagServiceInterface::class, TagService::class);
     }
 
     /**

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\{
     DashboardController,
     PermissionController,
     RoleController,
+    TagController,
     UserController
 };
 
@@ -38,3 +39,7 @@ Route::resource('users', UserController::class);
 // Categories
 Route::delete('categories/massDestroy', [CategoryController::class, 'massDestroy']);
 Route::resource('categories', CategoryController::class);
+
+// Tags
+Route::delete('tags/massDestroy', [TagController::class, 'massDestroy']);
+Route::resource('tags', TagController::class);
